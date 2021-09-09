@@ -1,0 +1,44 @@
+// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
+/*
+ * Copyright (c) 2017 T-Chip Intelligent Technology Co., Ltd
+ * Copyright (c) 2019 Markus Reichl <m.reichl@fivetechno.de>
+ */
+
+/dts-v1/;
+#include "rk3399-roc-pc-mezzanine.dts"
+
+/ {
+
+	model = "Firefly Station P1";
+	compatible = "firefly,station-p1", "firefly,roc-rk3399-pc-plus", "rockchip,rk3399";
+
+	aliases {
+		mmc0 = &sdmmc;
+		mmc1 = &sdhci; /* MMC boot device */
+	};
+
+	chosen {
+		bootargs = "swiotlb=1 spectre_v2=0 kpti=0 ssbd=force-off";
+	};
+};
+
+&rk808{
+	rtc {
+		compatible = "rk808-rtc";
+		status = "disabled";
+	};
+};
+
+&i2c0 {
+	status = "okay";
+	hym8563: hym8563@51 {
+		compatible = "haoyu,hym8563";
+		reg = <0x51>;
+		interrupt-parent = <&gpio0>;
+		interrupts = <5 IRQ_TYPE_EDGE_FALLING>;
+		pinctrl-names = "default";
+		#clock-cells = <0>;
+		clock-frequency = <32768>;
+		clock-output-names = "xin32k";
+	};
+};
