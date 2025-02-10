@@ -646,7 +646,7 @@
 		clock-names = "ext_clock";
         device-wake-gpios = <&gpio1 24 GPIO_ACTIVE_HIGH>;	//GPIO1_D0
         host-wakeup-gpios = <&gpio1 26 GPIO_ACTIVE_HIGH>;//GPIO1_D2
-        status = "okay";
+        status = "disable";
     };
 	
 };
